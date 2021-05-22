@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "react-three-fiber"
 import { ContactShadows, Environment, useGLTF, OrbitControls } from "drei"
 import { HexColorPicker } from "react-colorful"
 import { proxy, useProxy } from "valtio"
-
+import './styles/ShoeCanvas.css'
 // Using a Valtio state model to bridge reactivity between
 // the canvas and the dom, both can write to it and/or react to it.
 const state = proxy({
@@ -20,7 +20,7 @@ const state = proxy({
   },
 })
 
-function Shoe() {
+const Shoe = () => {
   const ref = useRef()
   const snap = useProxy(state)
   // Drei's useGLTF hook sets up draco automatically, that's how it differs from useLoader(GLTFLoader, url)
@@ -66,12 +66,12 @@ function Shoe() {
   )
 }
 
-function Picker() {
+  const Picker = () => {
   const snap = useProxy(state)
   return (
-    <div style={{ display: snap.current ? "block" : "none" }}>
+    <div style={{ display: snap.current ? "block" : "none", position: 'absolute', zIndex: 9999, margin: '10px' }}>
       <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
-      <h1>{snap.current}</h1>
+      <h1 style={{fontFamily: 'Tahoma'}}>{snap.current}</h1>
     </div>
   )
 }
@@ -79,7 +79,12 @@ function Picker() {
 const ShoeCanvas = () => {
   return (
     <>
-      <Canvas concurrent pixelRatio={[1, 1.5]} camera={{ position: [0, 0, 2.75] }}>
+      <Picker />
+      <div className="links-container">
+        <a href="#">Go back</a>
+        <a href="#">Go to chart</a>
+      </div>
+      <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}}>
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
         <Suspense fallback={null}>
@@ -89,7 +94,6 @@ const ShoeCanvas = () => {
         </Suspense>
         <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
       </Canvas>
-      <Picker />
     </>
   )
 }

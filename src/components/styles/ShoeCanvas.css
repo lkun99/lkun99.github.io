@@ -1,0 +1,14 @@
+.links-container {
+    position: absolute;
+    right: 0;
+    margin: 10;
+}
+
+.links-container a {
+    display: inline-block;
+    width: 100%;
+    font-family: Tahoma;
+    text-decoration: none;
+    color: #000;
+    font-size: 28px;
+}
