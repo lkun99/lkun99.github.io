@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -66,11 +66,10 @@ const useStyles = makeStyles((theme) => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
-
 export default function Page() {
 
     const [classes, setClasses] = useState()
-
+    const cardsContainer = useRef(null)
     useEffect(() => {
 
     }, [])
@@ -82,7 +81,7 @@ export default function Page() {
 
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative" id="header">
+      <AppBar position="fixed" id="header">
         <Toolbar>
           {/* <CameraIcon className={classes.icon} /> */}
           <Typography variant="h6" color="inherit" noWrap>
@@ -93,7 +92,7 @@ export default function Page() {
       <main>
         {/* Hero unit */}
         <Banner classesInfo={newClasses}/>
-        <Container className={newClasses.cardGrid} maxWidth="md">
+        <Container className={newClasses.cardGrid} maxWidth="md" ref={cardsContainer}>
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
