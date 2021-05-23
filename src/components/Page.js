@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const Page = () => {
 
   const [displayShoeCanvas, setDisplayShoeCanvas] = useState(false)
+  const [chartImage, setChartImage] = useState(null)
   const cardsContainer = useRef(null)
 
   const newClasses = useStyles()
@@ -70,11 +71,17 @@ const Page = () => {
     e.preventDefault()
     cardsContainer.current.scrollIntoView({behavior: 'smooth'})
   }
+
+  const goToChart = (base64Image) => {
+    alert('problem')
+    setChartImage(base64Image)
+  } 
+
   return (
     <>
       {
         displayShoeCanvas
-        ? <ShoeCanvas />
+        ? [chartImage ? <img src={chartImage} alt="product" /> : <ShoeCanvas goToChart={(img) => goToChart(img)} /> ]
         :
         <>
           <CssBaseline />
@@ -88,6 +95,9 @@ const Page = () => {
           <main>
             <Banner classesInfo={newClasses} handleSmoothScroll={(e) => handleSmoothScroll(e)} />
             <Container className={newClasses.cardGrid} maxWidth="md" ref={cardsContainer}>
+              <Typography variant="h2" color="inherit" style={{textAlign:'center', margin: '50px 0'}} noWrap>
+                Products
+              </Typography>
               <Grid 
                 container 
                 spacing={4}              

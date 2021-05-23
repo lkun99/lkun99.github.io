@@ -1,13 +1,73 @@
-.links-container {
+.links-container,.chart {
     position: absolute;
     right: 0;
-    margin: 10;
+    margin: 20px;
+    z-index: 9990;
+    font-family: Roboto;
+}
+.chart {
+    font-size: 24px;
+    padding: 10px 15px 150px 15px;
+    background: #3f51b5;
+    border-radius: 8px;
+    min-width: 250px;
+    color: #fff;
+}
+.chart .item {
+    margin: 10px 0;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chart .item input {
+    margin-top: 3px;
+    height: 25px;
+}
+.chart .price span {
+    font-size: 22px;
+    margin-top: 5px;
+}
+.chart .btn-wrapper {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+    left: 0;
+}
+.chart .btn-wrapper a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.chart .btn-wrapper a:hover {
+    color: #3f51b5;
+    background: #fff;
+    transition-duration: .5s;
+}
+.chart label {
+    font-size: 24px;
+}
+@media (max-width: 767px) {
+    .links-container,.chart  {
+        position: absolute;
+        bottom: 0;
+        left: auto;
+        right: auto;
+        margin: 10px 0;
+    }
+    .picker .react-colorful.picker {
+        width: 125px;
+        height: 125px;
+    }
+
 }
 
 .links-container a {
-    display: inline-block;
-    width: 100%;
-    font-family: Tahoma;
+    margin: 10px;
+    font-family: Roboto;
     text-decoration: none;
     color: #000;
     font-size: 28px;

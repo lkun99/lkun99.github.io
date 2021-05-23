@@ -69,22 +69,46 @@ const Shoe = () => {
   const Picker = () => {
   const snap = useProxy(state)
   return (
-    <div style={{ display: snap.current ? "block" : "none", position: 'absolute', zIndex: 9999, margin: '10px' }}>
+    <div style={{ display: snap.current ? "block" : "none", position: 'absolute', zIndex: 9999, margin: '10px' }} className="picker">
       <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
-      <h1 style={{fontFamily: 'Tahoma'}}>{snap.current}</h1>
+      <h1 style={{fontFamily: 'Roboto'}}>{snap.current}</h1>
     </div>
   )
 }
 
-const ShoeCanvas = () => {
+const ShoeCanvas = (props) => {
+  const canvasRef = useRef()
+  const [displayChart, setDisplayChart] = useState(false)
+
   return (
     <>
       <Picker />
-      <div className="links-container">
-        <a href="#">Go back</a>
-        <a href="#">Go to chart</a>
-      </div>
-      <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}}>
+      {displayChart
+        ?
+          <div className="chart">
+              <div className="chart-wrapper">
+                <h4>Summary: </h4>
+                <div className="size item">
+                    <label>Size: </label>
+                    <input min="36" max="46" type="number" />
+                  </div>
+                  <div className="price item">
+                    <label>Price: </label>
+                    <span>244.99 USD</span>
+                  </div>
+                  <div className="btn-wrapper">
+                    <a href="/">Buy now &rarr;</a>
+                  </div>
+              </div>
+          </div>
+        :
+          <div className="links-container">
+            <a href="#"> &larr; Go back</a>
+            <a href="#" onClick={() => setDisplayChart(true)}>Go to chart &rarr;</a>
+          </div>
+      }
+
+      <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}} ref={canvasRef}>
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
         <Suspense fallback={null}>
