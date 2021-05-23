@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const Page = () => {
 
   const [displayShoeCanvas, setDisplayShoeCanvas] = useState(false)
-  const [chartImage, setChartImage] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState()
   const cardsContainer = useRef(null)
 
   const newClasses = useStyles()
@@ -72,23 +72,25 @@ const Page = () => {
     cardsContainer.current.scrollIntoView({behavior: 'smooth'})
   }
 
-  const goToChart = (base64Image) => {
-    alert('problem')
-    setChartImage(base64Image)
-  } 
+  const handleSelectedProduct = (e) => {
+    console.log(e)
+    setDisplayShoeCanvas(!displayShoeCanvas)
+    setSelectedProduct(e)
+  }
 
   return (
     <>
       {
         displayShoeCanvas
-        ? [chartImage ? <img src={chartImage} alt="product" /> : <ShoeCanvas goToChart={(img) => goToChart(img)} /> ]
+        ? <ShoeCanvas goToChart={(img) => goToChart(img)} selectedProduct={selectedProduct} />
         :
         <>
           <CssBaseline />
           <AppBar position="fixed" id="header">
             <Toolbar>
               <Typography variant="h6" color="inherit" noWrap>
-                Album layout
+                Sneaker store  <img src="../assets/running-shoe.png" alt="logo" />
+
               </Typography>
             </Toolbar>
           </AppBar>
@@ -107,7 +109,7 @@ const Page = () => {
                     <Card className={newClasses.card}>
                       <CardMedia
                         className={newClasses.cardMedia}
-                        image="https://www.eobuwie.com.pl/media/catalog/product/cache/image/650x650/0/0/0000198765422_01_1_.jpg"
+                        image={card.image}
                         title="Item image"
                       />
                       <CardContent className={newClasses.cardContent}>
@@ -122,8 +124,8 @@ const Page = () => {
                         <Button 
                           className={newClasses.cardButton}
                           size="small" 
-                          color="primary" 
-                          onClick={e => setDisplayShoeCanvas(!displayShoeCanvas)}
+                          color="primary"
+                          onClick={() => handleSelectedProduct(card.name)}
                           >
                           Customize
                         </Button>

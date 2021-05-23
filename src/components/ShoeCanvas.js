@@ -3,7 +3,6 @@ import { Canvas, useFrame } from "react-three-fiber"
 import { ContactShadows, Environment, useGLTF, OrbitControls } from "drei"
 import { HexColorPicker } from "react-colorful"
 import { proxy, useProxy } from "valtio"
-import './styles/ShoeCanvas.css'
 // Using a Valtio state model to bridge reactivity between
 // the canvas and the dom, both can write to it and/or react to it.
 const state = proxy({
@@ -71,7 +70,7 @@ const Shoe = () => {
   return (
     <div style={{ display: snap.current ? "block" : "none", position: 'absolute', zIndex: 9999, margin: '10px' }} className="picker">
       <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
-      <h1 style={{fontFamily: 'Roboto'}}>{snap.current}</h1>
+      <p style={{fontFamily: 'Roboto'}}><strong>Currently editing:</strong> {snap.current}</p>
     </div>
   )
 }
@@ -79,6 +78,8 @@ const Shoe = () => {
 const ShoeCanvas = (props) => {
   const canvasRef = useRef()
   const [displayChart, setDisplayChart] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  useEffect(() => setSelectedProduct(props.selectedProduct), [props])
 
   return (
     <>
@@ -88,9 +89,13 @@ const ShoeCanvas = (props) => {
           <div className="chart">
               <div className="chart-wrapper">
                 <h4>Summary: </h4>
+                <div className="item">
+                    <label>Product: </label>
+                    <span>{selectedProduct}</span>
+                  </div>
                 <div className="size item">
                     <label>Size: </label>
-                    <input min="36" max="46" type="number" />
+                    <input min="36" max="46" defaultValue="42" type="number" />
                   </div>
                   <div className="price item">
                     <label>Price: </label>
@@ -107,7 +112,7 @@ const ShoeCanvas = (props) => {
             <a href="#" onClick={() => setDisplayChart(true)}>Go to chart &rarr;</a>
           </div>
       }
-
+      <h1 className="headline">Customizer</h1>
       <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}} ref={canvasRef}>
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />

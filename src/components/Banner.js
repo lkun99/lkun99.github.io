@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import Container from "@material-ui/core/Container"
-import './styles/Banner.css'
 
 const Banner = (props) => {
   useEffect(() => {
@@ -15,7 +14,7 @@ const Banner = (props) => {
         <Typography component="h1" variant="h1" align="center" className="banner__heading" gutterBottom>
           Galaxy Shoe Store
         </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+        <Typography variant="h5" align="center" color="#1e1c27" paragraph>
           Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short
           so folks don&apos;t simply skip over it entirely.
         </Typography>
