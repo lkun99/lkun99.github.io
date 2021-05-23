@@ -144,9 +144,20 @@ $theme-color: #1e1c27;
     margin: 10px 0;
   }
 
+  #root {
+    &>.picker {
+      top: 85px;
+    }
+  }
   .picker .react-colorful.picker {
     width: 125px;
     height: 125px;
+  }
+
+  .links-container a {
+    width: 100%;
+    display: inline-block;
+    font-size: 18px!important;
   }
 }
 

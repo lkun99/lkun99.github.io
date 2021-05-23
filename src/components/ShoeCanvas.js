@@ -108,7 +108,7 @@ const ShoeCanvas = (props) => {
           </div>
         :
           <div className="links-container">
-            <a href="#"> &larr; Go back</a>
+            <a href="#" onClick={() => props.handleClose()}> &larr; Go back</a>
             <a href="#" onClick={() => setDisplayChart(true)}>Go to chart &rarr;</a>
           </div>
       }

@@ -78,19 +78,22 @@ const Page = () => {
     setSelectedProduct(e)
   }
 
+  const handleClose = () => {
+    setDisplayShoeCanvas(false)
+  }
+
   return (
     <>
       {
         displayShoeCanvas
-        ? <ShoeCanvas goToChart={(img) => goToChart(img)} selectedProduct={selectedProduct} />
+        ? <ShoeCanvas handleClose={handleClose} selectedProduct={selectedProduct} />
         :
         <>
           <CssBaseline />
           <AppBar position="fixed" id="header">
             <Toolbar>
               <Typography variant="h6" color="inherit" noWrap>
-                Sneaker store  <img src="../assets/running-shoe.png" alt="logo" />
-
+                Sneaker store 
               </Typography>
             </Toolbar>
           </AppBar>
