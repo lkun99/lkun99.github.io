@@ -3,8 +3,7 @@ import { Canvas, useFrame } from "react-three-fiber"
 import { ContactShadows, Environment, useGLTF, OrbitControls } from "drei"
 import { HexColorPicker } from "react-colorful"
 import { proxy, useProxy } from "valtio"
-// Using a Valtio state model to bridge reactivity between
-// the canvas and the dom, both can write to it and/or react to it.
+
 const state = proxy({
   current: null,
   items: {
@@ -79,12 +78,21 @@ const ShoeCanvas = (props) => {
   const canvasRef = useRef()
   const [displayChart, setDisplayChart] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [showLoader, setShowLoader] = useState(true)
+
   useEffect(() => setSelectedProduct(props.selectedProduct), [props])
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+    setTimeout(() => setShowLoader(false), 3000)
+  }, [])
 
   return (
     <>
+      {showLoader ? <div className="loader">Loading...</div> : null}
+      <div className={"wrapper" + (showLoader ? " d-none" : "")}>
       <Picker />
-      {displayChart
+        {displayChart
         ?
           <div className="chart">
               <div className="chart-wrapper">
@@ -111,9 +119,9 @@ const ShoeCanvas = (props) => {
             <a href="#" onClick={() => props.handleClose()}> &larr; Go back</a>
             <a href="#" onClick={() => setDisplayChart(true)}>Go to chart &rarr;</a>
           </div>
-      }
-      <h1 className="headline">Customizer</h1>
-      <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}} ref={canvasRef}>
+        }
+        <h1 className="headline">Customizer</h1>
+        <Canvas concurrent pixelRatio={[2, 2.5]} camera={{ position: [0, 0, 2.75] }} style={{height: '100vh'}} ref={canvasRef}>
         <ambientLight intensity={0.3} />
         <spotLight intensity={0.3} angle={0.1} penumbra={1} position={[5, 25, 20]} />
         <Suspense fallback={null}>
@@ -123,6 +131,7 @@ const ShoeCanvas = (props) => {
         </Suspense>
         <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={false} enablePan={false} />
       </Canvas>
+      </div>
     </>
   )
 }

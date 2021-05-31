@@ -141,10 +141,10 @@ const Page = () => {
           </main>
           <footer className={newClasses.footer}>
             <Typography variant="h6" align="center" gutterBottom>
-              Footer
+              Galaxy Shoe Store
             </Typography>
             <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-              Something here to give the footer a purpose!
+              Find your perfect kick
             </Typography>
             <Copyright />
           </footer>
