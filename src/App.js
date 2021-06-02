@@ -5,7 +5,6 @@ import './assets/styles.scss'
 const App = (params) => {
     return (
         <Page />
-       // <ShoeCanvas />
     )
 }
 
