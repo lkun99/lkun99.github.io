@@ -1,13 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Button from "@material-ui/core/Button"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
 import Container from "@material-ui/core/Container"
 
 const Banner = (props) => {
-  useEffect(() => {
-    console.log(props)
-  })
+
   return (
     <div className={props.classesInfo.heroContent} className="banner">
       <Container maxWidth="sm">
@@ -15,8 +13,7 @@ const Banner = (props) => {
           Galaxy Shoe Store
         </Typography>
         <Typography variant="h5" align="center" color="#1e1c27" paragraph>
-          Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short
-          so folks don&apos;t simply skip over it entirely.
+          Start being unusual - why you need to spend hours and hours seeking the best shoe model when you can easily customize it on your own. Click the button below to learn more.
         </Typography>
         <div className={props.classesInfo.heroButtons}>
           <Grid container spacing={5} justify="center">
